@@ -71,9 +71,13 @@ async def send_new_embed(original_msg: discord.Message, embed: discord.Embed):
     webhook: discord.Webhook = await utils.get_webhook(client, original_msg.channel)
 
     try:
-        await original_msg.delete()
-        await webhook.send(content=original_msg.content, embed=embed, username=original_msg.author.display_name,
-                           avatar_url=original_msg.author.avatar_url)
+        if original_msg.guild.me.permissions_in(original_msg.channel).manage_messages:
+            await original_msg.delete()
+            await webhook.send(content=original_msg.content, embed=embed, username=original_msg.author.display_name,
+                               avatar_url=original_msg.author.avatar_url)
+        else:
+            await webhook.send(embed=embed, username=client.user.display_name,
+                               avatar_url=client.user.avatar_url)
     except discord.errors.NotFound:
         pass  # SHOULD never get here because we check before deleting, but just in case... Don't post replacement.
 
