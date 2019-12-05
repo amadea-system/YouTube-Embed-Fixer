@@ -37,7 +37,7 @@ async def on_ready():
 
 async def fix_yt_embed(message: discord.Message) -> Optional[discord.Embed]:
     regex_search_string = r'(?:https?://)?(?:www[.])?youtu(?:[.]be/|be[.]com/watch[?]v=)([^ ]*)'
-    if len(message.embeds) > 0:
+    if len(message.embeds) == 1:
         matches = re.findall(regex_search_string, message.content)
         if len(matches) > 0:
             # We have a valid youtube link with Embed! Check if it broken.
