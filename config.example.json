@@ -1,0 +1,6 @@
+{
+  "token": "DISCORD_BOT_TOKEN",
+  "error_log_channel": 123456789123,
+  "bot_prefix": "yt!",
+  "Bot": "YTEmbedFixer"
+}
